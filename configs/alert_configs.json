@@ -8,10 +8,11 @@
       "exchange": "BINANCE",
       "period": "1_HOUR",
       "show_summary": true,
+      "show_statistics": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
-        "moving_average_analysis": true,
+        "moving_average_analysis": true
       }
     },
     {
@@ -20,10 +21,11 @@
       "exchange": "BINANCE",
       "period": "1_HOUR",
       "show_summary": true,
+      "show_statistics": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
-        "moving_average_analysis": true,
+        "moving_average_analysis": true
       }
     }
   ]
