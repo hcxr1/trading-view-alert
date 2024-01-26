@@ -56,4 +56,4 @@ class TvAnalysis:
 
 if __name__ == "__main__":
   analyzer = TvAnalysis("AAPL","america","NASDAQ")
-  print(analyzer.rsi_analysis())
+  print(analyzer.get_summary())
