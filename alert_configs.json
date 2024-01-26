@@ -1,0 +1,30 @@
+{
+  "status": "enabled",
+  "interval": "1H",
+  "data":[
+    {
+      "symbol": "BTCUSDT",
+      "screener": "crypto",
+      "exchange": "BINANCE",
+      "period": "1_HOUR",
+      "show_summary": true,
+      "analysis": {
+        "rsi_analysis": true,
+        "macd_analysis": true,
+        "moving_average_analysis": true,
+      }
+    },
+    {
+      "symbol": "XRPUSDT",
+      "screener": "crypto",
+      "exchange": "BINANCE",
+      "period": "1_HOUR",
+      "show_summary": true,
+      "analysis": {
+        "rsi_analysis": true,
+        "macd_analysis": true,
+        "moving_average_analysis": true,
+      }
+    }
+  ]
+}
