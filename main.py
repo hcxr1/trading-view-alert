@@ -1,10 +1,43 @@
+import os
 import json
-
-
+from analysis.analysis import TvAnalysis
+from webhook.webhook import Webhook
 
 if __name__ == "__main__":
-  with open("alert_configs.json", "r") as file:
+  with open("configs/alert_configs.json", "r") as file:
     data = json.load(file)
 
+  webhook_id = os.environ.get("WEBHOOK_ID")
+  webhook_token = os.environ.get("WEBHOOK_TOKEN")
+  discord_webhook = Webhook(webhook_id, webhook_token)
+
   if data["status"] == "enabled":
-    """ logic here """
+    for item in data["data"]:
+        result_obj = {}
+        analyzer = TvAnalysis(
+                item["symbol"],
+                item["screener"],
+                item["exchange"],
+                item["period"]
+            )
+
+        result_obj["symbol"] = item["symbol"]
+        result_obj["exchange"] = item["exchange"]
+
+        if item["show_summary"] == True:
+            result_obj["summary"] = analyzer.get_summary()
+
+        if item["show_statistics"] == True:
+            result_obj["statistics"] = analyzer.get_statistics()
+
+        if item["analysis"]["rsi_analysis"] == True:
+            result_obj["rsi"] = analyzer.rsi_analysis()
+
+        if item["analysis"]["moving_average_analysis"] == True:
+            result_obj["ma"] = analyzer.moving_average_analysis()
+
+        if item["analysis"]["macd_analysis"] == True:
+            result_obj["macd"] = analyzer.macd_analysis()
+
+        discord_webhook.data_parser(result_obj)
+        discord_webhook.send_notification()
