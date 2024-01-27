@@ -1,12 +1,12 @@
 {
   "status": "enabled",
-  "interval": "1H",
+  "interval": "1h",
   "data":[
     {
       "symbol": "BTCUSDT",
       "screener": "crypto",
       "exchange": "BINANCE",
-      "period": "1_HOUR",
+      "period": "1h",
       "show_summary": true,
       "show_statistics": true,
       "analysis": {
@@ -19,7 +19,7 @@
       "symbol": "XRPUSDT",
       "screener": "crypto",
       "exchange": "BINANCE",
-      "period": "1_HOUR",
+      "period": "1h",
       "show_summary": true,
       "show_statistics": true,
       "analysis": {
