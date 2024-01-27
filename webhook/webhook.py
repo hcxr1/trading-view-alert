@@ -23,32 +23,32 @@ class Webhook:
 
     if "summary" in message.keys():
         temp += "**SENTIMENT**: **{0}** [BUY: {1} | SELL: {2} | NEUTRAL: {3}]\n".format(
-          item['summary']['RECOMMENDATION'],
-          item['summary']['BUY'],
-          item['summary']['SELL'],
-          item['summary']['NEUTRAL'],
+          message['summary']['RECOMMENDATION'],
+          message['summary']['BUY'],
+          message['summary']['SELL'],
+          message['summary']['NEUTRAL'],
             )
 
     if "statistics" in message.keys():
         temp += "**OHLC** {0} {1} {2} {3}\n**VOLUME** {4}\n".format(
-                    item['statistics']['open'],
-                    item['statistics']['high'],
-                    item['statistics']['low'],
-                    item['statistics']['close'],
-                    item['statistics']['volume']
+                    message['statistics']['open'],
+                    message['statistics']['high'],
+                    message['statistics']['low'],
+                    message['statistics']['close'],
+                    message['statistics']['volume']
             )
 
     if "rsi" in message.keys():
         temp += "**RSI** {0} [*{1}*]\n".format(
-                    item['rsi']['rsi'],
-                    item['rsi']['status']
+                    message['rsi']['rsi'],
+                    message['rsi']['status']
             )
 
     embed_obj["description"] = temp
 
-    if item['summary']['RECOMMENDATION'] == "SELL":
+    if message['summary']['RECOMMENDATION'] == "SELL":
         embed_obj["color"] = 16711680 #red
-    elif item['summary']['RECOMMENDATION'] == "BUY":
+    elif message['summary']['RECOMMENDATION'] == "BUY":
         embed_obj["color"] = 65280 #green
     else:
         embed_obj["color"] = 16777215 #white
