@@ -52,7 +52,7 @@ def analyze_data(data):
 
         generate_notification(result_obj)
 
-@schedule.repeat(schedule.every().hour)
+
 def run():
   """ Run Tasks """
   data = read_configs()
@@ -60,6 +60,9 @@ def run():
 
 if __name__ == "__main__":
 
+  schedule.every().hour.do(run)
+  print("+-+-+-+-+-+-+-+-+-+-+-+-+ TvAlert Bot Started +-+-+-+-+-+-+-+-+-+-+-+-+")
+  
   while 1:
     schedule.run_pending()
     time.sleep(1)
