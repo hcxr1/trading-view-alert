@@ -53,7 +53,7 @@ class Webhook:
     else:
         embed_obj["color"] = 16777215 #white
 
-    self.data["embeds"].push(embed_obj)
+    self.data["embeds"].append(embed_obj)
 
 
   def send_notification(self):
