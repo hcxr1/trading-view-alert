@@ -1,12 +1,12 @@
 {
   "status": "enabled",
-  "interval": "1h",
-  "data":[
+  "interval": "4h",
+  "data": [
     {
       "symbol": "BTCUSDT",
       "screener": "crypto",
       "exchange": "BINANCE",
-      "period": "1h",
+      "period": "4h",
       "show_summary": true,
       "show_statistics": true,
       "analysis": {
@@ -19,7 +19,46 @@
       "symbol": "XRPUSDT",
       "screener": "crypto",
       "exchange": "BINANCE",
-      "period": "1h",
+      "period": "4h",
+      "show_summary": true,
+      "show_statistics": true,
+      "analysis": {
+        "rsi_analysis": true,
+        "macd_analysis": true,
+        "moving_average_analysis": true
+      }
+    },
+    {
+      "symbol": "SHIBUSDT",
+      "screener": "crypto",
+      "exchange": "BINANCE",
+      "period": "4h",
+      "show_summary": true,
+      "show_statistics": true,
+      "analysis": {
+        "rsi_analysis": true,
+        "macd_analysis": true,
+        "moving_average_analysis": true
+      }
+    },
+    {
+      "symbol": "ZILUSDT",
+      "screener": "crypto",
+      "exchange": "BINANCE",
+      "period": "4h",
+      "show_summary": true,
+      "show_statistics": true,
+      "analysis": {
+        "rsi_analysis": true,
+        "macd_analysis": true,
+        "moving_average_analysis": true
+      }
+    },
+    {
+      "symbol": "ZILUSDT",
+      "screener": "crypto",
+      "exchange": "BINANCE",
+      "period": "4h",
       "show_summary": true,
       "show_statistics": true,
       "analysis": {
