@@ -15,7 +15,7 @@ class Webhook:
     today = datetime.now().strftime("%a %d %b %Y, %H:%M")
 
     #for all params, see https://discordapp.com/developers/docs/resources/webhook#execute-webhook
-    self.data["content"] = "@everyone **" + message["exchange"] + ":" + message["symbol"] + "** Update: " + today
+    self.data["content"] = "@everyone \n**" + message["exchange"] + ":" + message["symbol"] + "** [Updated: " + today + "]"
     self.data["embeds"] = []
 
     #for all params, see https://discordapp.com/developers/docs/resources/channel#embed-object
