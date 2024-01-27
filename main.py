@@ -57,6 +57,7 @@ def run():
   """ Run Tasks """
   data = read_configs()
   analyze_data(data)
+  print(schedule.get_jobs())
 
 if __name__ == "__main__":
 
