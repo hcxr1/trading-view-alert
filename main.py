@@ -60,9 +60,9 @@ def run():
   print(schedule.get_jobs())
 
 if __name__ == "__main__":
-
   schedule.every().hour.do(run)
   print("+-+-+-+-+-+-+-+-+-+-+-+-+ TvAlert Bot Started +-+-+-+-+-+-+-+-+-+-+-+-+")
+  print(schedule.get_jobs())
   
   while 1:
     schedule.run_pending()
