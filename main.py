@@ -51,7 +51,7 @@ def analyze_data(data):
 
         generate_notification(result_obj)
 
-@repeat(every().hour)
+@schedule.repeat(schedule.every().hour)
 def run():
   """ Run Tasks """
   data = read_configs()
