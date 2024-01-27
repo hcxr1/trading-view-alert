@@ -1,4 +1,5 @@
 import requests
+import json
 from datetime import datetime
 
 class Webhook:
@@ -12,12 +13,13 @@ class Webhook:
     today = datetime.now().strftime("%a %d %b %Y, %H:%M")
 
     #for all params, see https://discordapp.com/developers/docs/resources/webhook#execute-webhook
-    self.data["username"] = "TvAlert Bot"
-    self.data["allowed_mentions"] = { "parse": [ "everyone "]}
-    self.data["content"] = "@everyone **" + message["exchange"] + ":" + message["symbol"] + "** Update: " + today
+    obj = {}
+    obj["username"] = "TvAlert Bot"
+    obj["allowed_mentions"] = { "parse": [ "everyone "]}
+    obj["content"] = "@everyone **" + message["exchange"] + ":" + message["symbol"] + "** Update: " + today
+    obj["embeds"] = []
 
     #for all params, see https://discordapp.com/developers/docs/resources/channel#embed-object
-    self.data["embeds"] = []
     embed_obj = {}
     temp = ""
 
@@ -53,15 +55,17 @@ class Webhook:
     else:
         embed_obj["color"] = 16777215 #white
 
-    self.data["embeds"].append(embed_obj)
+    obj["embeds"].append(embed_obj)
+    self.data = obj
 
 
   def send_notification(self):
     webhook = self.url + self.id + '/' + self.token
-    result = requests.post(webhook, json = self.data)
+    result = self.data
+    req = requests.post(webhook, data = result, headers = { "Content-Type": "application/json" })
 
     try:
-      result.raise_for_status()
+      req.raise_for_status()
     except requests.exceptions.HTTPError as err:
       print(err)
     else:
