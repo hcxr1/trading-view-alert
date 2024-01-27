@@ -1,5 +1,4 @@
 import requests
-import json
 from datetime import datetime
 
 class Webhook:
@@ -7,24 +6,24 @@ class Webhook:
     self.url = "https://discord.com/api/webhooks/"
     self.id = webhook_id
     self.token = webhook_token
-    self.data = {}
+    self.data = {
+      "username": "TvAlert Bot",
+      "allowed_mentions": { "parse": [ "everyone" ] }
+    }
 
   def data_parser (self, message):
     today = datetime.now().strftime("%a %d %b %Y, %H:%M")
 
     #for all params, see https://discordapp.com/developers/docs/resources/webhook#execute-webhook
-    obj = {}
-    obj["username"] = "TvAlert Bot"
-    obj["allowed_mentions"] = { "parse": [ "everyone "]}
-    obj["content"] = "@everyone **" + message["exchange"] + ":" + message["symbol"] + "** Update: " + today
-    obj["embeds"] = []
+    self.data["content"] = "@everyone **" + message["exchange"] + ":" + message["symbol"] + "** Update: " + today
+    self.data["embeds"] = []
 
     #for all params, see https://discordapp.com/developers/docs/resources/channel#embed-object
     embed_obj = {}
     temp = ""
 
     if "summary" in message.keys():
-        temp += "**SENTIMENT**: **{0}** [BUY: {1} | SELL: {2} | NEUTRAL: {3}]\n".format(
+        temp += "**SENTIMENT**: **{0}**   [ BUY: {1} | SELL: {2} | NEUTRAL: {3} ]\n".format(
           message['summary']['RECOMMENDATION'],
           message['summary']['BUY'],
           message['summary']['SELL'],
@@ -32,7 +31,7 @@ class Webhook:
             )
 
     if "statistics" in message.keys():
-        temp += "**OHLC** {0} {1} {2} {3}\n**VOLUME** {4}\n".format(
+        temp += "**OHLC**   ${0} |  ${1} |  ${2} |  ${3}\n**VOLUME**   {4}\n".format(
                     message['statistics']['open'],
                     message['statistics']['high'],
                     message['statistics']['low'],
@@ -41,7 +40,7 @@ class Webhook:
             )
 
     if "rsi" in message.keys():
-        temp += "**RSI** {0} [*{1}*]\n".format(
+        temp += "**RSI**   {0}   [ *{1}* ]\n".format(
                     message['rsi']['rsi'],
                     message['rsi']['status']
             )
@@ -55,17 +54,15 @@ class Webhook:
     else:
         embed_obj["color"] = 16777215 #white
 
-    obj["embeds"].append(embed_obj)
-    self.data = obj
+    self.data["embeds"].append(embed_obj)
 
 
   def send_notification(self):
     webhook = self.url + self.id + '/' + self.token
-    result = self.data
-    req = requests.post(webhook, data = result, headers = { "Content-Type": "application/json" })
+    result = requests.post(webhook, json = self.data, headers = { "Content-Type": "application/json" })
 
     try:
-      req.raise_for_status()
+      result.raise_for_status()
     except requests.exceptions.HTTPError as err:
       print(err)
     else:
