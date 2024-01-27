@@ -1,16 +1,26 @@
 import os
 import json
+import schedule
 from analysis.analysis import TvAnalysis
 from webhook.webhook import Webhook
 
-if __name__ == "__main__":
+def read_configs():
+  """ Read configs json """
   with open("configs/alert_configs.json", "r") as file:
     data = json.load(file)
+  return data
 
+
+def generate_notification(result):
+  """ Generate Notification to Discord """
   webhook_id = os.environ.get("WEBHOOK_ID")
   webhook_token = os.environ.get("WEBHOOK_TOKEN")
   discord_webhook = Webhook(webhook_id, webhook_token)
+  discord_webhook.data_parser(result)
+  discord_webhook.send_notification()
 
+def analyze_data(data):
+  """ Analyze data based on configs """
   if data["status"] == "enabled":
     for item in data["data"]:
         result_obj = {}
@@ -39,5 +49,17 @@ if __name__ == "__main__":
         if item["analysis"]["macd_analysis"] == True:
             result_obj["macd"] = analyzer.macd_analysis()
 
-        discord_webhook.data_parser(result_obj)
-        discord_webhook.send_notification()
+        generate_notification(result_obj)
+
+@repeat(every().hour)
+def run():
+  """ Run Tasks """
+  data = read_configs()
+  analyze_data(data)
+
+if __name__ == "__main__":
+
+  while 1:
+    schedule.run_pending()
+    time.sleep(1)
+
