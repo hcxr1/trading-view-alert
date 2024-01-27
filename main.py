@@ -60,7 +60,17 @@ def run():
   print(schedule.get_jobs())
 
 if __name__ == "__main__":
-  schedule.every().hour.do(run)
+  # define scheduler
+  cfgs = read_configs()
+  if cfgs["interval"] == "1h":
+    schedule.every().hour.do(run)
+  elif cfgs["interval"] == "4h":
+    schedule.every(4).hours.do(run)
+  elif cfgs["interval"] == "1d":
+    schedule.every().day.do(run)
+  elif cfgs["interval"] == "1W":
+    schedule.every().week.do(run)
+
   print("+-+-+-+-+-+-+-+-+-+-+-+-+ TvAlert Bot Started +-+-+-+-+-+-+-+-+-+-+-+-+")
   print(schedule.get_jobs())
   
