@@ -9,7 +9,7 @@ class Webhook:
     self.data = {}
 
   def data_parser (self, message):
-    today = datetime.now()
+    today = datetime.now().strftime("%a %d %b %Y, %H:%M")
 
     #for all params, see https://discordapp.com/developers/docs/resources/webhook#execute-webhook
     self.data["username"] = "TvAlert Bot"
