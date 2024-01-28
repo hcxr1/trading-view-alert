@@ -1,3 +1,4 @@
+[
 {
   "status": "enabled",
   "interval": "4h",
@@ -69,3 +70,4 @@
     }
   ]
 }
+]
