@@ -38,6 +38,9 @@ def analyze_data(data):
         if item["show_summary"] == True:
             result_obj["summary"] = analyzer.get_summary()
 
+        if item["show_summary_breakdown"] == True:
+            result_obj["summary_breakdown"] = analyzer.get_summary_breakdown()
+
         if item["show_statistics"] == True:
             result_obj["statistics"] = analyzer.get_statistics()
 
@@ -52,26 +55,31 @@ def analyze_data(data):
 
         generate_notification(result_obj)
 
+def run(data):
+  analyze_data(data)
+  print(schedule.get_jobs())     
 
-def run():
+def init():
   """ Run Tasks """
   data = read_configs()
+  run(data)
+
   for item in data:
-    analyze_data(item)
-  print(schedule.get_jobs())
+     run(item)
+     if item["interval"] == "1h":
+       schedule.every().hour.do(run, data = item)
+     elif item["interval"] == "4h":
+       schedule.every(4).hours.do(run, data = item)
+     elif item["interval"] == "1d":
+       schedule.every().day.do(run, data = item)
+     elif item["interval"] == "1W":
+       schedule.every().week.do(run, data = item)
+  
+
 
 if __name__ == "__main__":
   # define scheduler
-  cfgs = read_configs()
-  if cfgs["interval"] == "1h":
-    schedule.every().hour.do(run)
-  elif cfgs["interval"] == "4h":
-    schedule.every(4).hours.do(run)
-  elif cfgs["interval"] == "1d":
-    schedule.every().day.do(run)
-  elif cfgs["interval"] == "1W":
-    schedule.every().week.do(run)
-
+  init()
   print("+-+-+-+-+-+-+-+-+-+-+-+-+ TvAlert Bot Started +-+-+-+-+-+-+-+-+-+-+-+-+")
   print(schedule.get_jobs())
   

@@ -22,6 +22,18 @@ class TvAnalysis:
   def get_summary(self):
     return self.analysis().summary
 
+  def get_summary_breakdown(self):
+    osc = self.analysis().oscillators
+    ma = self.analysis().moving_averages
+
+    result = {}
+    result["osc_recommendation"] = osc["RECOMMENDATION"]
+    result["oscillators"] = osc["COMPUTE"]
+    result["ma_recommendation"] = ma["RECOMMENDATION"]
+    result["moving_averages"] = ma["COMPUTE"]
+
+    return result
+
   def get_statistics(self):
     temp = self.get_indicators()
     result = {}
@@ -48,7 +60,14 @@ class TvAnalysis:
     return result
 
   def moving_average_analysis(self):
-    return
+    indicators = self.get_indicators()
+    ema20 = indicators["EMA20"]
+    ema50 = indicators["EMA50"]
+    ema200 = indicators["EMA200"]
+
+    result = {}
+
+    return result
 
   def macd_analysis(self):
     return
@@ -57,3 +76,6 @@ class TvAnalysis:
 if __name__ == "__main__":
   analyzer = TvAnalysis("AAPL","america","NASDAQ")
   print(analyzer.get_summary())
+  print(analyzer.analysis().oscillators)
+  print(analyzer.analysis().moving_averages)
+  print(analyzer.get_indicators())
