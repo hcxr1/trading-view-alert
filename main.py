@@ -62,10 +62,8 @@ def run(data):
 def init():
   """ Run Tasks """
   data = read_configs()
-  run(data)
-
+  # define scheduler
   for item in data:
-     run(item)
      if item["interval"] == "1h":
        schedule.every().hour.do(run, data = item)
      elif item["interval"] == "4h":
@@ -78,7 +76,6 @@ def init():
 
 
 if __name__ == "__main__":
-  # define scheduler
   init()
   print("+-+-+-+-+-+-+-+-+-+-+-+-+ TvAlert Bot Started +-+-+-+-+-+-+-+-+-+-+-+-+")
   print(schedule.get_jobs())
