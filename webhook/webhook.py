@@ -1,4 +1,5 @@
 import requests
+import tabulate
 from datetime import datetime
 
 class Webhook:
@@ -31,7 +32,7 @@ class Webhook:
             )
 
     if "statistics" in message.keys():
-        temp += "**OHLC**   ${0} |  ${1} |  ${2} |  ${3}\n**VOLUME**   {4}\n".format(
+        temp += "- **OHLC**   ${0} |  ${1} |  ${2} |  ${3}\n**VOLUME**   {4}\n".format(
                     message['statistics']['open'],
                     message['statistics']['high'],
                     message['statistics']['low'],
@@ -39,8 +40,11 @@ class Webhook:
                     message['statistics']['volume']
             )
 
+    if "summary_breakdown" in message.keys():
+       temp += ""
+
     if "rsi" in message.keys():
-        temp += "**RSI**   {0}   [ *{1}* ]\n".format(
+        temp += "- **RSI**   {0}   [ *{1}* ]\n".format(
                     message['rsi']['rsi'],
                     message['rsi']['status']
             )
