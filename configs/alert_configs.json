@@ -10,7 +10,7 @@
       "period": "4h",
       "show_summary": true,
       "show_statistics": true,
-      "show summary_breakdown": true,
+      "show_summary_breakdown": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
@@ -24,7 +24,7 @@
       "period": "4h",
       "show_summary": true,
       "show_statistics": true,
-      "show summary_breakdown": true,
+      "show_summary_breakdown": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
@@ -38,7 +38,7 @@
       "period": "4h",
       "show_summary": true,
       "show_statistics": true,
-      "show summary_breakdown": true,
+      "show_summary_breakdown": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
@@ -52,7 +52,7 @@
       "period": "4h",
       "show_summary": true,
       "show_statistics": true,
-      "show summary_breakdown": true,
+      "show_summary_breakdown": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
@@ -66,7 +66,7 @@
       "period": "4h",
       "show_summary": true,
       "show_statistics": true,
-      "show summary_breakdown": true,
+      "show_summary_breakdown": true,
       "analysis": {
         "rsi_analysis": true,
         "macd_analysis": true,
